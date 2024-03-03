@@ -1,0 +1,5 @@
+Flask==2.2.3
+python-dotenv
+Telethon==1.24.0
+gunicorn==20.1.0
+aiohttp==3.8.1
