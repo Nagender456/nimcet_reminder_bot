@@ -1,8 +1,9 @@
 import asyncio
+import os, random
 from datetime import datetime
-import os
 from dotenv import load_dotenv
 from telethon import TelegramClient, events
+from extra.poll_creator import create_poll
 
 load_dotenv()
 
@@ -46,6 +47,30 @@ async def handle_message(event):
     elif message.startswith('/nimcet'):
         nimcet_response = create_nimcet_response()
         await event.respond(nimcet_response)
+    elif message.startswith('/poll'):
+        reply_to = getattr(event.message.reply_to, 'reply_to_msg_id', None)
+
+        if reply_to is None:
+            await event.reply("__Reply to the question to make poll!__")
+            return
+
+        message_parts = message.split()
+        correct_option = None
+        if len(message_parts) > 1:
+            correct_option = message_parts[1][0]
+            correct_option = correct_option if correct_option in ['a', 'b', 'c', 'd'] else None
+
+        options_poll = create_poll(correct_option)
+
+        await client.send_message(entity=event.chat_id, file=options_poll, reply_to=reply_to)
+
+    elif random.randint(1, 50) == 1:
+        if random.randint(1, 3) > 1:
+            nimcet_response = create_nimcet_response()
+            await event.respond(nimcet_response)
+        else:
+            cuet_response = create_cuet_response()
+            await event.respond(cuet_response)
 
 async def main():
     await client.start(bot_token=os.getenv('TELEGRAM_BOT_TOKEN'))
