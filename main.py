@@ -4,19 +4,22 @@ from datetime import datetime
 from dotenv import load_dotenv
 from telethon import TelegramClient, events
 from extra.poll_creator import create_poll
+import pytz
 
 load_dotenv()
 
 api_id = os.getenv('TELEGRAM_API_ID')
 api_hash = os.getenv('TELEGRAM_API_HASH')
 
-nimcet_exam_date = datetime(2024, 6, 8, 14, 0, 0)
-cuet_exam_date = datetime(2024, 3, 19, 16, 0, 0)
+ist = pytz.timezone('Asia/Kolkata')
 
-client = TelegramClient('session', api_id, api_hash)
+nimcet_exam_date = ist.localize(datetime(2024, 6, 8, 14, 0, 0))
+cuet_exam_date = ist.localize(datetime(2024, 3, 19, 16, 0, 0))
+
+client = TelegramClient('session', api_id, api_hash, request_retries=100, connection_retries=100, retry_delay=5)
 
 def create_cuet_response():
-    cuet_remaining_time = cuet_exam_date - datetime.now()
+    cuet_remaining_time = cuet_exam_date - ist.localize(datetime.now())
     cuet_remaining_days = cuet_remaining_time.days
     cuet_remaining_hours, cuet_remainder = divmod(cuet_remaining_time.seconds, 3600)
     cuet_remaining_minutes, _ = divmod(cuet_remainder, 60)
@@ -24,7 +27,7 @@ def create_cuet_response():
     return cuet_response
 
 def create_nimcet_response():
-    nimcet_remaining_time = nimcet_exam_date - datetime.now()
+    nimcet_remaining_time = nimcet_exam_date - ist.localize(datetime.now())
     nimcet_remaining_days = nimcet_remaining_time.days
     nimcet_remaining_hours, nimcet_remainder = divmod(nimcet_remaining_time.seconds, 3600)
     nimcet_remaining_minutes, _ = divmod(nimcet_remainder, 60)
