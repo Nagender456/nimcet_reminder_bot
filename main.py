@@ -99,10 +99,10 @@ async def handle_message(event):
     elif random.randint(1, 50) == 1:
         if random.randint(1, 3) > 1:
             nimcet_response = create_nimcet_response()
-            await send_and_delete(event, nimcet_response, delete_timer)
+            await event.respond(nimcet_response)
         else:
             cuet_response = create_cuet_response()
-            await send_and_delete(event, cuet_response, delete_timer)
+            await event.respond(cuet_response)
 
 async def main():
     await client.start(bot_token=os.getenv('TELEGRAM_BOT_TOKEN'))
