@@ -17,6 +17,9 @@ IST_OFFSET_FIX = timedelta(hours=0, minutes=23)
 nimcet_exam_date = datetime(2024, 6, 8, 14, 0, 0, tzinfo=IST) + IST_OFFSET_FIX
 cuet_exam_date = datetime(2024, 3, 19, 16, 0, 0, tzinfo=IST) + IST_OFFSET_FIX
 
+delete_timer = 10
+admins_id = [1330729713, 5463589388]
+
 client = TelegramClient('session', api_id, api_hash, request_retries=100, connection_retries=100, retry_delay=5)
 
 def create_cuet_response():
@@ -35,22 +38,47 @@ def create_nimcet_response():
     nimcet_response = f"**⏳ Countdown to NIMCET 2024 ⏳**\n\n**{nimcet_remaining_days}** __Days__ **{nimcet_remaining_hours}** __Hours__ **{nimcet_remaining_minutes}** __Mins__ **{nimcet_remaining_seconds}** __Secs__"
     return nimcet_response
 
+async def send_and_delete(event, message, wait_time=5):
+    message = await event.respond(message)
+    if wait_time is None: return
+    await asyncio.sleep(wait_time)
+    await client.delete_messages(event.chat_id, message)
+
 @client.on(events.NewMessage)
 async def handle_message(event):
+    global delete_timer
     message = event.message.message.lower()
+
+    if message.startswith('/settime'):
+        user = await event.get_sender()
+        if user.id in admins_id:
+            try:
+                time = float(message.split()[1])
+                if time < 0:
+                    delete_timer = None
+                    await event.reply(f"Auto-delete is disabled!")
+                else:
+                    delete_timer = time
+                    await event.reply(f"Auto-delete set to {delete_timer} seconds!")
+            except:
+                await event.reply("**Usage:**\n\n/settime `time`")
+        else:
+            await send_and_delete(event, "**Not for you!**")
+        return
+
     if message.startswith('/time'):
         if 'cuet' in message:
             cuet_response = create_cuet_response()
-            await event.respond(cuet_response)
+            await send_and_delete(event, cuet_response, delete_timer)
         else:
             nimcet_response = create_nimcet_response()
-            await event.respond(nimcet_response)
+            await send_and_delete(event, nimcet_response, delete_timer)
     elif message.startswith('/cuet'):
         cuet_response = create_cuet_response()
-        await event.respond(cuet_response)
+        await send_and_delete(event, cuet_response, delete_timer)
     elif message.startswith('/nimcet'):
         nimcet_response = create_nimcet_response()
-        await event.respond(nimcet_response)
+        await send_and_delete(event, nimcet_response, delete_timer)
     elif message.startswith('/poll'):
         reply_to = getattr(event.message.reply_to, 'reply_to_msg_id', None)
 
@@ -71,10 +99,10 @@ async def handle_message(event):
     elif random.randint(1, 50) == 1:
         if random.randint(1, 3) > 1:
             nimcet_response = create_nimcet_response()
-            await event.respond(nimcet_response)
+            await send_and_delete(event, nimcet_response, delete_timer)
         else:
             cuet_response = create_cuet_response()
-            await event.respond(cuet_response)
+            await send_and_delete(event, cuet_response, delete_timer)
 
 async def main():
     await client.start(bot_token=os.getenv('TELEGRAM_BOT_TOKEN'))
