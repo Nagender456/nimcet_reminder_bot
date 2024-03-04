@@ -69,15 +69,19 @@ async def handle_message(event):
     if message.startswith('/time'):
         if 'cuet' in message:
             cuet_response = create_cuet_response()
+            await client.delete_messages(event.chat_id, event.message)
             await send_and_delete(event, cuet_response, delete_timer)
         else:
             nimcet_response = create_nimcet_response()
+            await client.delete_messages(event.chat_id, event.message)
             await send_and_delete(event, nimcet_response, delete_timer)
     elif message.startswith('/cuet'):
         cuet_response = create_cuet_response()
+        await client.delete_messages(event.chat_id, event.message)
         await send_and_delete(event, cuet_response, delete_timer)
     elif message.startswith('/nimcet'):
         nimcet_response = create_nimcet_response()
+        await client.delete_messages(event.chat_id, event.message)
         await send_and_delete(event, nimcet_response, delete_timer)
     elif message.startswith('/poll'):
         reply_to = getattr(event.message.reply_to, 'reply_to_msg_id', None)
@@ -91,6 +95,9 @@ async def handle_message(event):
         if len(message_parts) > 1:
             correct_option = message_parts[1][0]
             correct_option = correct_option if correct_option in ['a', 'b', 'c', 'd'] else None
+            
+        if correct_option is not None:
+            await client.delete_messages(event.chat_id, event.message)
 
         options_poll = create_poll(correct_option)
 
