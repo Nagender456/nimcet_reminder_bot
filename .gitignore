@@ -1,4 +1,5 @@
 .env
 session.session
+session.session-journal
 bot.session
 __pycache__
