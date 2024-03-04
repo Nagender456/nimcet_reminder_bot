@@ -24,7 +24,7 @@ def create_cuet_response():
     cuet_remaining_days = cuet_remaining_time.days
     cuet_remaining_hours, cuet_remainder = divmod(cuet_remaining_time.seconds, 3600)
     cuet_remaining_minutes, cuet_remaining_seconds = divmod(cuet_remainder, 60)
-    cuet_response = f"**⏳ Countdown to CUET 2024 ⏳**\n\n**{cuet_remaining_days}** __Days__ **{cuet_remaining_hours}** __Hours__ **{cuet_remaining_minutes}** __Minutes__ **{cuet_remaining_seconds}** __Seconds__"
+    cuet_response = f"**⏳ Countdown to CUET 2024 ⏳**\n\n**{cuet_remaining_days}** __Days__ **{cuet_remaining_hours}** __Hours__ **{cuet_remaining_minutes}** __Mins__ **{cuet_remaining_seconds}** __Secs__"
     return cuet_response
 
 def create_nimcet_response():
@@ -32,7 +32,7 @@ def create_nimcet_response():
     nimcet_remaining_days = nimcet_remaining_time.days
     nimcet_remaining_hours, nimcet_remainder = divmod(nimcet_remaining_time.seconds, 3600)
     nimcet_remaining_minutes, nimcet_remaining_seconds = divmod(nimcet_remainder, 60)
-    nimcet_response = f"**⏳ Countdown to NIMCET 2024 ⏳**\n\n**{nimcet_remaining_days}** __Days__ **{nimcet_remaining_hours}** __Hours__ **{nimcet_remaining_minutes}** __Minutes__ **{nimcet_remaining_seconds}** __Seconds__"
+    nimcet_response = f"**⏳ Countdown to NIMCET 2024 ⏳**\n\n**{nimcet_remaining_days}** __Days__ **{nimcet_remaining_hours}** __Hours__ **{nimcet_remaining_minutes}** __Mins__ **{nimcet_remaining_seconds}** __Secs__"
     return nimcet_response
 
 @client.on(events.NewMessage)
