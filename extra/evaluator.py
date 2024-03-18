@@ -15,7 +15,10 @@ def calculate_expression(calculation_question : str):
 	calculation_response = f"**{calculation_question}**\n\n"
 	calculation_response += f"```{calculation_answer}```"
 
-	return calculation_response
+	if len(calculation_response) > 1000:
+		return "Answer too large!"
+	else:
+		return calculation_response
 
 def d(n):
 	return radians(n)
