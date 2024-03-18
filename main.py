@@ -4,6 +4,7 @@ from datetime import datetime, timedelta
 from dotenv import load_dotenv
 from telethon import TelegramClient, events
 from extra.poll_creator import create_poll
+from extra.evaluator import calculate_expression
 import pytz
 
 load_dotenv()
@@ -66,7 +67,7 @@ async def handle_message(event):
             await send_and_delete(event, "**Not for you!**")
         return
 
-    if message.startswith('/time'):
+    elif message.startswith('/time'):
         if 'cuet' in message:
             cuet_response = create_cuet_response()
             await client.delete_messages(event.chat_id, event.message)
@@ -110,6 +111,11 @@ async def handle_message(event):
         else:
             cuet_response = create_cuet_response()
             await event.respond(cuet_response)
+    
+    else:
+        expression_evaluation = calculate_expression(message)
+        if expression_evaluation is not None:
+            await event.reply(expression_evaluation)
 
 async def main():
     await client.start(bot_token=os.getenv('TELEGRAM_BOT_TOKEN'))
