@@ -16,3 +16,6 @@ def calculate_expression(calculation_question : str):
 	calculation_response += f"```{calculation_answer}```"
 
 	return calculation_response
+
+def d(n):
+	return radians(n)
