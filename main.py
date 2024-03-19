@@ -24,11 +24,11 @@ admins_id = [1330729713, 5463589388]
 client = TelegramClient('session', api_id, api_hash, request_retries=100, connection_retries=100, retry_delay=5)
 
 def create_cuet_response():
-    cuet_remaining_time = cuet_exam_date - datetime.now(IST)
+    cuet_remaining_time = datetime.now(IST) - cuet_exam_date
     cuet_remaining_days = cuet_remaining_time.days
     cuet_remaining_hours, cuet_remainder = divmod(cuet_remaining_time.seconds, 3600)
     cuet_remaining_minutes, cuet_remaining_seconds = divmod(cuet_remainder, 60)
-    cuet_response = f"**⏳ Countdown to CUET 2024 ⏳**\n\n**{cuet_remaining_days}** __Days__ **{cuet_remaining_hours}** __Hours__ **{cuet_remaining_minutes}** __Mins__ **{cuet_remaining_seconds}** __Secs__"
+    cuet_response = f"**⏳ CUET 2024 Over ⏳**\n\n**{cuet_remaining_days}** __Days__ **{cuet_remaining_hours}** __Hours__ **{cuet_remaining_minutes}** __Mins__ **{cuet_remaining_seconds}** __Secs__ Ago"
     return cuet_response
 
 def create_nimcet_response():
