@@ -45,6 +45,12 @@ async def send_and_delete(event, message, wait_time=5):
     await asyncio.sleep(wait_time)
     await client.delete_messages(event.chat_id, message)
 
+async def reply_and_delete(event, message, wait_time=5):
+    message = await event.reply(message)
+    if wait_time is None: return
+    await asyncio.sleep(wait_time)
+    await client.delete_messages(event.chat_id, message)
+
 @client.on(events.NewMessage)
 async def handle_message(event):
     global delete_timer
@@ -110,6 +116,15 @@ async def handle_message(event):
 
         await client.send_message(entity=event.chat_id, file=options_poll, reply_to=reply_to)
 
+    elif message.startswith('/cal'):
+        message = message[4:].strip()
+        if len(message) < 1:
+            reply_and_delete(event, "Provide expression to calculate result.", 5)
+            return
+        expression_evaluation = calculate_expression(message)
+        if expression_evaluation is not None:
+            await event.reply(expression_evaluation)
+
     elif random.randint(1, 50) == 1:
         if random.randint(1, 3) > 1:
             nimcet_response = create_nimcet_response()
@@ -118,10 +133,6 @@ async def handle_message(event):
             cuet_response = create_cuet_response()
             await event.respond(cuet_response)
     
-    else:
-        expression_evaluation = calculate_expression(message)
-        if expression_evaluation is not None:
-            await event.reply(expression_evaluation)
 
 async def main():
     await client.start(bot_token=os.getenv('TELEGRAM_BOT_TOKEN'))

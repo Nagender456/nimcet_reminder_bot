@@ -10,7 +10,7 @@ def calculate_expression(calculation_question : str):
 		except:
 			pass
 	except Exception as e:
-		return None
+		return "**Error**"+'\n\n'+'```'+str(e)+'```'
 
 	calculation_response = f"**{calculation_question}**\n\n"
 	calculation_response += f"```{calculation_answer}```"
