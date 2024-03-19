@@ -16,7 +16,7 @@ IST = pytz.timezone('Asia/Kolkata')
 IST_OFFSET_FIX = timedelta(hours=0, minutes=23)
 
 nimcet_exam_date = datetime(2024, 6, 8, 14, 0, 0, tzinfo=IST) + IST_OFFSET_FIX
-cuet_exam_date = datetime(2024, 3, 19, 16, 0, 0, tzinfo=IST) + IST_OFFSET_FIX
+cuet_exam_date = datetime(2024, 3, 19, 18, 15, 0, tzinfo=IST) + IST_OFFSET_FIX
 
 delete_timer = 36000
 admins_id = [1330729713, 5463589388]
