@@ -126,12 +126,8 @@ async def handle_message(event):
             await event.reply(expression_evaluation)
 
     elif random.randint(1, 50) == 1:
-        if random.randint(1, 3) > 1:
-            nimcet_response = create_nimcet_response()
-            await event.respond(nimcet_response)
-        else:
-            cuet_response = create_cuet_response()
-            await event.respond(cuet_response)
+        nimcet_response = create_nimcet_response()
+        await event.respond(nimcet_response)
     
 
 async def main():
