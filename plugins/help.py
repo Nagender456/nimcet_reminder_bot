@@ -1,7 +1,7 @@
 from . import client
 from telethon import events
 
-@client.on(events.NewMessage(pattern='/help*'))
+@client.on(events.NewMessage(pattern='/help*', incoming=True))
 async def _(event):
 
     reply_msg = """
@@ -11,5 +11,3 @@ async def _(event):
     """
 
     await event.reply(reply_msg)
-
-
