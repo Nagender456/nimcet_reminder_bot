@@ -1,16 +1,14 @@
 import asyncio
 import os, random
 from datetime import datetime, timedelta
-from dotenv import load_dotenv
-from telethon import TelegramClient, events
+from telethon import events
+from core.client import client
 from extra.poll_creator import create_poll
 from extra.evaluator import calculate_expression
 import pytz
 
-load_dotenv()
-
-api_id = os.getenv('TELEGRAM_API_ID')
-api_hash = os.getenv('TELEGRAM_API_HASH')
+# this imports file the files mentions in plugins/__init__.py
+import plugins
 
 IST = pytz.timezone('Asia/Kolkata')
 IST_OFFSET_FIX = timedelta(hours=0, minutes=23)
@@ -21,7 +19,7 @@ cuet_exam_date = datetime(2024, 3, 19, 18, 15, 0, tzinfo=IST) + IST_OFFSET_FIX
 delete_timer = 36000
 admins_id = [1330729713, 5463589388]
 
-client = TelegramClient('session', api_id, api_hash, request_retries=100, connection_retries=100, retry_delay=5)
+
 
 def create_cuet_response():
     cuet_remaining_time = datetime.now(IST) - cuet_exam_date
