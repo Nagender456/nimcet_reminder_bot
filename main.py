@@ -17,9 +17,7 @@ nimcet_exam_date = datetime(2024, 6, 8, 14, 0, 0, tzinfo=IST) + IST_OFFSET_FIX
 cuet_exam_date = datetime(2024, 3, 19, 18, 15, 0, tzinfo=IST) + IST_OFFSET_FIX
 
 delete_timer = 36000
-admins_id = [1330729713, 5463589388]
-
-
+admins_id = [1330729713, 5463589388, 6164352361]
 
 def create_cuet_response():
     cuet_remaining_time = datetime.now(IST) - cuet_exam_date
