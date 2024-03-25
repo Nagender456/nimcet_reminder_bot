@@ -96,7 +96,7 @@ async def handle_message(event):
         reply_to = getattr(event.message.reply_to, 'reply_to_msg_id', None)
 
         if reply_to is None:
-            await event.reply("__Reply to the question to make poll!__")
+            await event.reply("__Reply to a message to make poll!__")
             return
 
         message_parts = message.split()
