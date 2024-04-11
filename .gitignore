@@ -3,4 +3,4 @@ env
 session.session
 session.session-journal
 bot.session
-__pycache__
+__pycache__/
