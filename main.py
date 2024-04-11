@@ -18,7 +18,7 @@ cuet_exam_date = datetime(2024, 3, 19, 18, 15, 0, tzinfo=IST) + IST_OFFSET_FIX
 
 delete_timer = 36000
 admins_id = [1330729713, 5463589388, 6164352361]
-cal_command_chats = [-1001327011060]
+cal_command_chats = [1327011060]
 
 def get_time_difference(time1, time2):
     remaining_time = time2 - time1
