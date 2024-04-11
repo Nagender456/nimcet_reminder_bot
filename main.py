@@ -18,7 +18,6 @@ cuet_exam_date = datetime(2024, 3, 19, 18, 15, 0, tzinfo=IST) + IST_OFFSET_FIX
 
 delete_timer = 36000
 admins_id = [1330729713, 5463589388, 6164352361]
-cal_command_chats = [1327011060]
 
 def get_time_difference(time1, time2):
     remaining_time = time2 - time1
@@ -120,7 +119,7 @@ async def handle_message(event):
 
         await client.send_message(entity=event.chat_id, file=options_poll, reply_to=reply_to)
 
-    elif message.startswith('/cal') and chat_id in cal_command_chats:
+    elif message.startswith('/cal'):
         message = message[4:].strip()
         if len(message) < 1:
             reply_and_delete(event, "Provide expression to calculate result.", 5)
