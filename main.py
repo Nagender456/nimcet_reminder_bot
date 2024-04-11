@@ -117,7 +117,12 @@ async def handle_message(event):
         if len(message) < 1:
             reply_and_delete(event, "Provide expression to calculate result.", 5)
             return
-        expression_evaluation = calculate_expression(message)
+        
+        try:
+            expression_evaluation = calculate_expression(message)
+        except TimeoutError:
+            expression_evaluation = "Calculation timed out!"
+
         if expression_evaluation is not None:
             await event.reply(expression_evaluation)
 
