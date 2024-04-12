@@ -19,7 +19,8 @@ def calculate_expression(calculation_question : str):
     except Exception as e:
         return "**Error**"+'\n\n'+'```'+str(e)+'```'
 
-    calculation_response = f"**{calculation_question}**\n\n"
+    if len(calculation_question) < 20:
+        calculation_response = f"**{calculation_question}**\n\n"
     calculation_response += f"```{calculation_answer}```"
 
     if len(calculation_response) > 1000:
