@@ -1,4 +1,5 @@
 from math import *
+import random
 
 from .decorators.timeout import timeout, TimeoutError
 
@@ -28,3 +29,12 @@ def calculate_expression(calculation_question : str):
 
 def d(n):
     return radians(n)
+
+def cot(n):
+    return 1/tan(n)
+
+def sec(n):
+    return 1/cos(n)
+
+def cosec(n):
+    return 1/sin(n)
