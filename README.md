@@ -33,7 +33,6 @@ Features:
 * Evaluator to perform basic arithmetic operations
 `/cal [operation]`
 * Polling features to setup polls with different config ability.
-`/poll <message> [<options>]`
 * *more coming soon...*
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -82,9 +81,13 @@ Features:
 
 <!-- USAGE EXAMPLES -->
 ## Usage
-
-*commands for telegram coming soon, until you can use /help command.*
-
+```sh
+/help - Display this message.
+/nimcet - Get NIMCET 2024 timer.
+/cuet - Get CUET 2024 timer.
+/cal - To calculate the value of an expression.
+/poll - To create a poll with 4 options.
+```
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- CONTRIBUTING -->
