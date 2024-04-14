@@ -13,11 +13,9 @@
     <img src="./static/logo.jpg" alt="Logo" width="80" height="80" style="border-radius: 50%">
   </a>
 
-  <h3 align="center">nimcer-reminder-bot</h3>
+  <h3 align="center">nimcet-reminder-bot</h3>
 
   <p align="center">
-    An awesome README template to jumpstart your projects!
-    <br />
     <br />
     <br />
     <a href="https://t.me/nimcet_reminder_bot">View Demo</a>
@@ -33,7 +31,7 @@ Constant guilt-tripping at random times to remind you of the approaching NIMCET 
 
 Features:
 * Evaluator to perform basic arithmetic operations
-`/eval [operation]`
+`/cal [operation]`
 * Polling features to setup polls with different config ability.
 `/poll <message> [<options>]`
 * *more coming soon...*
